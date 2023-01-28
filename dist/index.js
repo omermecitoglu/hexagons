@@ -15,5 +15,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./cartesian"), exports);
+__exportStar(require("./conversions"), exports);
 __exportStar(require("./fields"), exports);
 __exportStar(require("./hexagons"), exports);
