@@ -1,11 +1,18 @@
-import { Point, angleBetweenPoints } from "./cartesian";
+import { angleBetweenPoints } from "./cartesian";
 import { hexToCartesian } from "./conversions";
-import { Field } from "./fields";
 
 export type HexaPoint = {
   q: number,
   r: number,
 };
+
+export function createHexaPoint(q: number, r: number): HexaPoint {
+  return { q, r };
+}
+
+export function areSameHexagons(h1: HexaPoint, h2: HexaPoint) {
+  return (h1.q === h2.q && h1.r === h2.r);
+}
 
 export function hexDistance(h1: HexaPoint, h2: HexaPoint) {
   const h1_s = (h1.q + h1.r) * -1;
@@ -17,11 +24,13 @@ export function angleBetweenHexagons(h1: HexaPoint, h2: HexaPoint) {
   return angleBetweenPoints(hexToCartesian(h1, 3), hexToCartesian(h2, 3));
 }
 
-export function isPointInField({ x, y }: Point, field: Field, extra = 0) {
-  return (
-    x > field.topLeft.x - extra &&
-    x < field.bottomRight.x + extra &&
-    y > field.topLeft.y - extra &&
-    y < field.bottomRight.y + extra
-  );
+export function hexNeighbors({ q, r }: HexaPoint): HexaPoint[] {
+  return [
+    createHexaPoint(q + 1, r - 1),
+    createHexaPoint(q + 1, r),
+    createHexaPoint(q, r + 1),
+    createHexaPoint(q - 1, r + 1),
+    createHexaPoint(q - 1, r),
+    createHexaPoint(q, r - 1),
+  ];
 }
