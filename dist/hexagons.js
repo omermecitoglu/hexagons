@@ -1,8 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isPointInField = exports.angleBetweenHexagons = exports.hexDistance = void 0;
+exports.hexNeighbors = exports.angleBetweenHexagons = exports.hexDistance = exports.areSameHexagons = exports.createHexaPoint = void 0;
 var cartesian_1 = require("./cartesian");
 var conversions_1 = require("./conversions");
+function createHexaPoint(q, r) {
+    return { q: q, r: r };
+}
+exports.createHexaPoint = createHexaPoint;
+function areSameHexagons(h1, h2) {
+    return (h1.q === h2.q && h1.r === h2.r);
+}
+exports.areSameHexagons = areSameHexagons;
 function hexDistance(h1, h2) {
     var h1_s = (h1.q + h1.r) * -1;
     var h2_s = (h2.q + h2.r) * -1;
@@ -13,12 +21,15 @@ function angleBetweenHexagons(h1, h2) {
     return (0, cartesian_1.angleBetweenPoints)((0, conversions_1.hexToCartesian)(h1, 3), (0, conversions_1.hexToCartesian)(h2, 3));
 }
 exports.angleBetweenHexagons = angleBetweenHexagons;
-function isPointInField(_a, field, extra) {
-    var x = _a.x, y = _a.y;
-    if (extra === void 0) { extra = 0; }
-    return (x > field.topLeft.x - extra &&
-        x < field.bottomRight.x + extra &&
-        y > field.topLeft.y - extra &&
-        y < field.bottomRight.y + extra);
+function hexNeighbors(_a) {
+    var q = _a.q, r = _a.r;
+    return [
+        createHexaPoint(q + 1, r - 1),
+        createHexaPoint(q + 1, r),
+        createHexaPoint(q, r + 1),
+        createHexaPoint(q - 1, r + 1),
+        createHexaPoint(q - 1, r),
+        createHexaPoint(q, r - 1),
+    ];
 }
-exports.isPointInField = isPointInField;
+exports.hexNeighbors = hexNeighbors;

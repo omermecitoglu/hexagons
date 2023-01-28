@@ -1,6 +1,6 @@
 {
   "name": "@viegnar/hexagons",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "provides some utility functions for hexagon calculations",
   "main": "dist/index.js",
   "author": "Viegnar",

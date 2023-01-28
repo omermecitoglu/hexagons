@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createField = void 0;
+exports.isPointInField = exports.createField = void 0;
 var cartesian_1 = require("./cartesian");
 function createField(sX, sY, eX, eY, extra) {
     if (extra === void 0) { extra = 0; }
@@ -10,3 +10,12 @@ function createField(sX, sY, eX, eY, extra) {
     };
 }
 exports.createField = createField;
+function isPointInField(_a, field, extra) {
+    var x = _a.x, y = _a.y;
+    if (extra === void 0) { extra = 0; }
+    return (x > field.topLeft.x - extra &&
+        x < field.bottomRight.x + extra &&
+        y > field.topLeft.y - extra &&
+        y < field.bottomRight.y + extra);
+}
+exports.isPointInField = isPointInField;
